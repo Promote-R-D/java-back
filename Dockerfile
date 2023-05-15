@@ -1,5 +1,5 @@
 # 기반이 될 도커 이미지 선택
-FROM openjdk:20-jdk
+FROM openjdk:17-jdk
 
 # 작업 디렉토리 생성 및 설정
 WORKDIR /app
