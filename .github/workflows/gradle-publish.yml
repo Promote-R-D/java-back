@@ -1,0 +1,59 @@
+name: Java master with Gradle
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Make ENV
+        run: |
+          cd ./src/main/resources
+          touch ./application.properties
+          echo "${{ secrets.APPLICATION_PROPERTIES }}" > ./application.properties
+        shell: bash
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Build with Gradle
+        run: ./gradlew clean build -x test 
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Web Docker build and push
+        run: |
+          docker build -t rolety2202/medical .
+          docker push rolety2202/medical
+
+  deploy-dev:
+    name: Deploy-dev
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST_ADDRESS }}
+          username: root
+          password: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 30022
+          envs: GITHUB_SHA
+          script: |
+            cd docker
+            docker pull rolety2202/medical:latest
+            docker-compose up -d medical-dev
