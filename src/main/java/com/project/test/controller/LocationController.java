@@ -15,8 +15,8 @@ public class LocationController {
     @PostMapping("/locationTo/{km}")
     public ResponseDto<?> locationTo(@RequestBody LocationDto locationDto,
                                      @PathVariable Long km){
-        System.out.println(locationDto.getLat());
-        System.out.println(locationDto.getLng());
+//        System.out.println(locationDto.getLat());
+//        System.out.println(locationDto.getLng());
         return gisService.locationTo(locationDto,km);
     }
 }

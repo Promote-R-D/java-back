@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(indexes = {@Index(name = "index_drug_product_name", columnList = "product_name_a,product_name_b")})
 public class ContraindicatedDrug {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

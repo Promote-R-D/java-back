@@ -36,6 +36,7 @@ public class ContraindicatedDrugService {
                     .productNameB(contraindicatedDrug.getProductNameB())
                     .companyB(contraindicatedDrug.getCompanyB())
                     .details(contraindicatedDrug.getDetails())
+                    
                     .contraindicated(drugDto.getDrug1()+"와 "+drugDto.getDrug2()+"는(은) 범용금기약물입니다. 담당의사와 상의하세요.")
                     .build());
         } else {
