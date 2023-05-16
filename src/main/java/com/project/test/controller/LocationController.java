@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(value = "/test")
 @RequiredArgsConstructor
-@CrossOrigin
 public class LocationController {
     private final GisService gisService;
 

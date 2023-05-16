@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(value = "/test")
 @RequiredArgsConstructor
-@CrossOrigin
 public class SearchController {
     private final SearchService searchService;
 

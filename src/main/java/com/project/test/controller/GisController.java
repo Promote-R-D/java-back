@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/test")
 @RequiredArgsConstructor
-@CrossOrigin
 public class GisController {
     private final GisService gisService;
     @GetMapping("miInfo")

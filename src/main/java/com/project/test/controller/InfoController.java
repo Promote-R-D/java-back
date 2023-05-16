@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(value = "/test")
 @RequiredArgsConstructor
-@CrossOrigin
 public class InfoController {
     private final HmwInfoService hmwInfoService;
     //보건의료복지 정보
