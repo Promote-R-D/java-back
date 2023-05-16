@@ -52,11 +52,14 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST_ADDRESS }}
-          username: root
+          username: 조정민
           password: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 30022
+          port: 22
           envs: GITHUB_SHA
           script: |
             cd docker
+            docker stop rolety2202-medical1
+            docker rm rolety2202-medical1
             docker pull rolety2202/medical:latest
-            docker-compose up -d medical-dev
+            docker run rolety2202-medical1
+            #docker-compose up -d rolety2202-medical1
