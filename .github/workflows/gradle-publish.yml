@@ -37,6 +37,7 @@ jobs:
           docker build -t rolety2202/medical .
           docker push rolety2202/medical
 
+
   deploy-dev:
     name: Deploy-dev
     needs: build
