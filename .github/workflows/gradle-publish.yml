@@ -48,6 +48,11 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Set up Docker environment
+        run: |
+          echo "DOCKER_PATH=/usr/local/bin:/usr/bin:/bin" >> $GITHUB_ENV
+          echo "PATH=\$PATH:\$DOCKER_PATH" >> $GITHUB_ENV
+
       - name: Deploy
         uses: appleboy/ssh-action@master
         with:
