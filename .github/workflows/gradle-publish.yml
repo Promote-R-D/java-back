@@ -47,7 +47,7 @@ jobs:
         with:
           host: ${{ secrets.HOST_ADDRESS }}
           username: 조정민
-          password: ${{ secrets.SSH_PASSWORD }}
+          password: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           envs: GITHUB_SHA
           script: |
