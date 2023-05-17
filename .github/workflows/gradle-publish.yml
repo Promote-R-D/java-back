@@ -48,22 +48,16 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Docker environment
-        run: |
-          echo "DOCKER_PATH=/usr/local/bin:/usr/bin:/bin" >> $GITHUB_ENV
-          echo "PATH=\$PATH:\$DOCKER_PATH" >> $GITHUB_ENV
-
       - name: Deploy
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST_ADDRESS }}
           username: 조정민
           password: ${{ secrets.SSH_PRIVATE_KEY }}
-          shell: /bin/bash  # 쉘을 여기에 명시적으로 지정합니다
           port: 22
           envs: GITHUB_SHA
           script: |
-            docker stop rolety2202-medical1
-            docker rm rolety2202-medical1
-            docker pull rolety2202/medical:latest
-            docker run --name rolety2202-medical1 -d -p 8090:8080 rolety2202/medical:latest
+            sudo docker stop rolety2202-medical1
+            sudo docker rm rolety2202-medical1
+            sudo docker pull rolety2202/medical:latest
+            sudo docker run --name rolety2202-medical1 -d -p 8090:8080 rolety2202/medical:latest
