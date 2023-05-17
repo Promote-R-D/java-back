@@ -37,12 +37,21 @@ jobs:
           docker build -t rolety2202/medical .
           docker push rolety2202/medical
 
-
   deploy-dev:
     name: Deploy-dev
     needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Deploy
-        run: |
-          ssh ${{ secrets.HOST_ADDRESS }} -l 조정민 -p 22 'docker stop rolety2202-medical1; docker rm rolety2202-medical1; docker pull rolety2202/medical:latest; docker run --name rolety2202-medical1 -d -p 8090:8080 rolety2202/medical:latest'
+        uses: appleboy/ssh-action@v2
+        with:
+          host: ${{ secrets.HOST_ADDRESS }}
+          username: 조정민
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: 22
+          envs: GITHUB_SHA
+          script: |
+            docker stop rolety2202-medical1
+            docker rm rolety2202-medical1
+            docker pull rolety2202/medical:latest
+            docker run --name rolety2202-medical1 -d -p 8090:8080 rolety2202/medical:latest
