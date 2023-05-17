@@ -49,7 +49,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@v3
         with:
           host: ${{ secrets.HOST_ADDRESS }}
           username: 조정민
@@ -57,8 +57,7 @@ jobs:
           port: 22
           envs: GITHUB_SHA
           script: |
-              cd /var/services/homes/조정민
-              docker stop rolety2202-medical1
-              docker rm rolety2202-medical1
-              docker pull rolety2202/medical:latest
-              docker run --name rolety2202-medical1 -d -p 8090:8080 rolety2202/medical:latest
+            docker stop rolety2202-medical1
+            docker rm rolety2202-medical1
+            docker pull rolety2202/medical:latest
+            docker run --name rolety2202-medical1 -d -p 8090:8080 rolety2202/medical:latest
