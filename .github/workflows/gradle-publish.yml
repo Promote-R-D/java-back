@@ -59,6 +59,7 @@ jobs:
           host: ${{ secrets.HOST_ADDRESS }}
           username: 조정민
           password: ${{ secrets.SSH_PRIVATE_KEY }}
+          shell: /bin/bash  # 쉘을 여기에 명시적으로 지정합니다
           port: 22
           envs: GITHUB_SHA
           script: |
