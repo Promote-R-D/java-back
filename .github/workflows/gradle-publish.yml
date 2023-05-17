@@ -11,33 +11,27 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
           java-version: '17'
-
       - name: Make ENV
         run: |
           cd ./src/main/resources
           touch ./application.properties
           echo "${{ secrets.APPLICATION_PROPERTIES }}" > ./application.properties
         shell: bash
-
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
-
       - name: Build with Gradle
         run: ./gradlew clean build -x test 
-
       - name: Login to DockerHub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
       - name: Web Docker build and push
         run: |
           docker build -t rolety2202/medical .
@@ -57,7 +51,7 @@ jobs:
           port: 22
           envs: GITHUB_SHA
           script: |
-            sudo docker stop rolety2202-medical1
-            sudo docker rm rolety2202-medical1
-            sudo docker pull rolety2202/medical:latest
-            sudo docker run --name rolety2202-medical1 -d -p 8090:8080 rolety2202/medical:latest
+            docker stop rolety2202-medical1
+            docker rm rolety2202-medical1
+            docker pull rolety2202/medical:latest
+            docker run --name rolety2202-medical1 -d -p 8090:8080 rolety2202/medical:latest
