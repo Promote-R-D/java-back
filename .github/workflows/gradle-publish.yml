@@ -47,11 +47,11 @@ jobs:
         with:
           host: ${{ secrets.HOST_ADDRESS }}
           username: server
-          password: ${{ secrets.SSH_PRIVATE_KEY }}
+          password: ${{ secrets.SSH_PASSWORD }}
           port: 22
           envs: GITHUB_SHA
           script: |
-            echo "${{ secrets.SSH_PRIVATE_KEY }}" | sudo -S -i
+            echo "${{ secrets.SSH_PASSWORD }}" | sudo -S -i
             docker stop rolety2202-medical1
             docker rm rolety2202-medical1
             docker pull rolety2202/medical:latest
