@@ -51,7 +51,7 @@ jobs:
           port: 22
           envs: GITHUB_SHA
           script: |
-            echo "${{ secrets.SSH_PASSWORD }}" | sudo -S -i
+            echo "$SSH_PASSWORD" | sudo -S -i
             docker stop rolety2202-medical1
             docker rm rolety2202-medical1
             docker pull rolety2202/medical:latest
