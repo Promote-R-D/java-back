@@ -51,7 +51,7 @@ jobs:
           port: 22
           envs: GITHUB_SHA
           script: |
-            docker stop rolety2202-medical1
-            docker rm rolety2202-medical1
-            docker pull rolety2202/medical:latest
-            docker run --name rolety2202-medical1 -d -p 8090:8080 rolety2202/medical:latest
+            ssh server@${{ secrets.HOST_ADDRESS }} 'docker stop rolety2202-medical1'
+            ssh server@${{ secrets.HOST_ADDRESS }} 'docker rm rolety2202-medical1'
+            ssh server@${{ secrets.HOST_ADDRESS }} 'docker pull rolety2202/medical:latest'
+            ssh server@${{ secrets.HOST_ADDRESS }} 'docker run --name rolety2202-medical1 -d -p 8090:8080 rolety2202/medical:latest'
