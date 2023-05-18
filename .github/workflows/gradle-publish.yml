@@ -42,12 +42,6 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Install Docker
-        run: |
-         curl -fsSL https://get.docker.com -o get-docker.sh
-         sudo sh get-docker.sh
-         sudo usermod -aG docker $USER
-         sudo systemctl enable docker
       - name: Deploy
         uses: appleboy/ssh-action@master
         with:
@@ -57,7 +51,8 @@ jobs:
           port: 22
           envs: GITHUB_SHA
           script: |
-            echo ${{ secrets.SSH_PASSWORD }} | sudo -S -i
+            sudo -S -i
+            ${{secrets.SSH_PASSWORD}}
             docker stop rolety2202-medical1
             docker rm rolety2202-medical1
             docker pull rolety2202/medical:latest
