@@ -51,7 +51,7 @@ jobs:
           port: 22
           envs: GITHUB_SHA
           script: |
-            docker stop rolety2202-medical1
-            docker rm rolety2202-medical1
-            docker pull rolety2202/medical:latest
-            docker run --name rolety2202-medical1 -d -p 8090:8080 rolety2202/medical:latest
+            /var/packages/Docker/target/usr/bin/docker stop rolety2202-medical1
+            /var/packages/Docker/target/usr/bin/docker rm rolety2202-medical1
+            /var/packages/Docker/target/usr/bin/docker pull rolety2202/medical:latest
+            /var/packages/Docker/target/usr/bin/docker run --name rolety2202-medical1 -d -p 8090:8080 rolety2202/medical:latest
