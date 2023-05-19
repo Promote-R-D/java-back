@@ -51,7 +51,11 @@ jobs:
           port: 22
           envs: GITHUB_SHA
           script: |
-            /var/packages/Docker/target/usr/bin/docker stop rolety2202-medical1
-            /var/packages/Docker/target/usr/bin/docker rm rolety2202-medical1
-            /var/packages/Docker/target/usr/bin/docker pull rolety2202/medical:latest
-            /var/packages/Docker/target/usr/bin/docker run --name rolety2202-medical1 -d -p 8090:8080 rolety2202/medical:latest
+            DOCKER_CMD=/var/packages/Docker/target/usr/bin/docker
+            CONTAINER_NAME=rolety2202-medical1
+            IMAGE_NAME=rolety2202/medical:latest
+
+            $DOCKER_CMD stop $CONTAINER_NAME
+            $DOCKER_CMD rm $CONTAINER_NAME
+            $DOCKER_CMD pull $IMAGE_NAME
+            $DOCKER_CMD run --name $CONTAINER_NAME -d -p 8090:8080 $IMAGE_NAME
