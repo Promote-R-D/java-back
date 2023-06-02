@@ -27,17 +27,25 @@ public interface MedicalInstitutionRepository extends JpaRepository<MedicalInsti
                                     String dong,
                                     String mi,
                                     String md);
-    @Query("SELECT l FROM MedicalInstitution l WHERE " +
-            "(6371 * acos(cos(radians(:latitude)) * " +
-            "cos(radians(l.lat)) * " +
-            "cos(radians(l.lng) - " +
-            "radians(:longitude)) + " +
-            "sin(radians(:latitude)) * " +
-            "sin(radians(l.lat)))) <= :radius")
-    List<MedicalInstitution> findNearbyLocations(
-            @Param("latitude") double latitude,
-            @Param("longitude") double longitude,
-            @Param("radius") double radius);
+//    @Query("SELECT l FROM MedicalInstitution l WHERE " +
+//            "(6371 * acos(cos(radians(:latitude)) * " +
+//            "cos(radians(l.lat)) * " +
+//            "cos(radians(l.lng) - " +
+//            "radians(:longitude)) + " +
+//            "sin(radians(:latitude)) * " +
+//            "sin(radians(l.lat)))) <= :radius")
+//    List<MedicalInstitution> findNearbyLocations(
+//            @Param("latitude") double latitude,
+//            @Param("longitude") double longitude,
+//            @Param("radius") double radius);
+@Query("SELECT l " +
+        "FROM MedicalInstitution l " +
+        "WHERE (6371 * acos(cos(radians(:latitude)) * cos(radians(l.lat)) * cos(radians(l.lng) - radians(:longitude)) + sin(radians(:latitude)) * sin(radians(l.lat)))) <= :radius " +
+        "ORDER BY (6371 * acos(cos(radians(:latitude)) * cos(radians(l.lat)) * cos(radians(l.lng) - radians(:longitude)) + sin(radians(:latitude)) * sin(radians(l.lat))))")
+List<MedicalInstitution> findNearbyLocationsOrderedByDistance(
+        @Param("latitude") double latitude,
+        @Param("longitude") double longitude,
+        @Param("radius") double radius);
     @Query("SELECT h FROM MedicalInstitution h WHERE lower(h.hospitalName) LIKE lower(concat('%', :name, '%'))")
     List<MedicalInstitution> findByNameFuzzyMatch(@Param("name") String name);
     @Query("SELECT h FROM MedicalInstitution h WHERE lower(h.medicalDepartment) LIKE lower(concat('%', :name, '%'))")

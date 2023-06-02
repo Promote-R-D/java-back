@@ -52,5 +52,9 @@ public class MedicalInstitution {
 
     @Column(name="phone_number")
     private String phoneNumber;
-    
+    @Transient
+    private String distance;
+    public void setDistance(String distance) {
+        this.distance = distance;
+    }
 }
