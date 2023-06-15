@@ -28,7 +28,16 @@ public class SearchService {
         return ResponseDto.success(byNameFuzzyMatch);
     }
     public ResponseDto<?> searchMd(SearchDto data){
-        List<MedicalInstitution>byMdFuzzyMatch =medicalInstitutionRepository.findByMdFuzzyMatch(data.getMd());
+//        System.out.println("또 : "+data.getDdo());
+        if(data.getDdo()==null){
+            return ResponseDto.fail("NULL_POINT","행정구역을 선택해 주세요");
+        }else if(data.getDdo().isEmpty()){
+            return ResponseDto.fail("UPDATE_PRE","행정구역을 선택해 주세요");
+        }
+        List<MedicalInstitution>byMdFuzzyMatch =medicalInstitutionRepository.findByDistrictAndMedicalDepartment(data.getDdo(), data.getMd());
+        if(byMdFuzzyMatch.isEmpty()){
+            return ResponseDto.fail("UPDATE_PRE",data.getDdo()+"는 업데이트 예정중입니다.");
+        }
         return ResponseDto.success(byMdFuzzyMatch);
     }
 }

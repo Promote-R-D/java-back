@@ -52,8 +52,13 @@ List<MedicalInstitution> findNearbyLocationsOrderedByDistance(
 //    List<MedicalInstitution> findByMdFuzzyMatch(@Param("name") String name);
 
 //    @Query(value = "SELECT * FROM medical_institution WHERE medical_department IN (:departments)", nativeQuery = true)
-    @Query("SELECT m FROM MedicalInstitution m WHERE m.medicalDepartment = :department OR m.medicalDepartment LIKE :department||'%' OR m.medicalDepartment LIKE '%, '||:department||'%' OR m.medicalDepartment LIKE '%,'||:department||'%'")
-    List<MedicalInstitution> findByMdFuzzyMatch(@Param("department") String department);
+@Query("SELECT m FROM MedicalInstitution m WHERE m.ddo = :district AND " +
+        "(m.medicalDepartment = :department OR " +
+        "m.medicalDepartment LIKE :department||'%' " +
+        "OR m.medicalDepartment LIKE '%, '||:department||'%' " +
+        "OR m.medicalDepartment LIKE '%,'||:department||'%')")
+//    List<MedicalInstitution> findByMdFuzzyMatch(@Param("department") String department);
+    List<MedicalInstitution> findByDistrictAndMedicalDepartment(@Param("district") String district, @Param("department") String department);
 
 
 //    @Query(value = "SELECT * FROM medical_institution WHERE medical_department REGEXP '^:name$'",nativeQuery = true)
