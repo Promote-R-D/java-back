@@ -48,8 +48,14 @@ List<MedicalInstitution> findNearbyLocationsOrderedByDistance(
         @Param("radius") double radius);
     @Query("SELECT h FROM MedicalInstitution h WHERE lower(h.hospitalName) LIKE lower(concat('%', :name, '%'))")
     List<MedicalInstitution> findByNameFuzzyMatch(@Param("name") String name);
-    @Query("SELECT h FROM MedicalInstitution h WHERE lower(h.medicalDepartment) LIKE lower(concat('%', :name, '%'))")
-    List<MedicalInstitution> findByMdFuzzyMatch(@Param("name") String name);
+//    @Query("SELECT h FROM MedicalInstitution h WHERE lower(h.medicalDepartment) LIKE lower(concat('%', :name, '%'))")
+//    List<MedicalInstitution> findByMdFuzzyMatch(@Param("name") String name);
+
+//    @Query(value = "SELECT * FROM medical_institution WHERE medical_department IN (:departments)", nativeQuery = true)
+    @Query("SELECT m FROM MedicalInstitution m WHERE m.medicalDepartment = :department OR m.medicalDepartment LIKE :department||'%' OR m.medicalDepartment LIKE '%, '||:department||'%' OR m.medicalDepartment LIKE '%,'||:department||'%'")
+    List<MedicalInstitution> findByMdFuzzyMatch(@Param("department") String department);
+
+
 //    @Query(value = "SELECT * FROM medical_institution WHERE medical_department REGEXP '^:name$'",nativeQuery = true)
 //    List<MedicalInstitution> findByMdFuzzyMatch(@Param("name") String name);
 }
