@@ -40,4 +40,7 @@ public class SearchService {
         }
         return ResponseDto.success(byMdFuzzyMatch);
     }
+    public ResponseDto<?> test(){
+        return ResponseDto.success("테스트");
+    }
 }
