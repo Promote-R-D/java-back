@@ -1,4 +1,5 @@
-package com.project.test.repository;//package com.project.test.repository;
+//package com.project.test.repository;
+
 //
 //import com.project.test.entity.Member;
 //import org.springframework.data.jpa.repository.JpaRepository;

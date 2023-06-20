@@ -1,4 +1,6 @@
-package com.project.test.entity;//package com.project.test.entity;
+
+//package com.project.test.entity;
+
 //
 //import jakarta.persistence.*;
 //import lombok.AllArgsConstructor;
