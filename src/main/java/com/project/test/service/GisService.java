@@ -22,12 +22,12 @@ public class GisService {
        List<MedicalInstitution> infos= medicalInstitutionRepository.findAll();
        return ResponseDto.success(infos);
     }
-    @Transactional
-    public ResponseDto<?> mIInfoCh(){
-//        List<MedicalInstitution> infos= medicalInstitutionRepository.findByGu("흥덕구");
-        List<MedicalInstitution> infos= medicalInstitutionRepository.findByGuLimit();
-        return ResponseDto.success(infos);
-    }
+//    @Transactional
+//    public ResponseDto<?> mIInfoCh(){
+////        List<MedicalInstitution> infos= medicalInstitutionRepository.findByGu("흥덕구");
+//        List<MedicalInstitution> infos= medicalInstitutionRepository.findByGuLimit();
+//        return ResponseDto.success(infos);
+//    }
 //    @Transactional
 //    public ResponseDto<?> LeaderSelect(Long id) {
 //        Employee employee = isPresentEmployee(id);

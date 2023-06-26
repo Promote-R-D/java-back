@@ -22,8 +22,8 @@ public class MedicalInstitution {
     @Column(name="si")
     private String si;
 
-    @Column(name="gu")
-    private String gu;
+//    @Column(name="gu")
+//    private String gu;
     @Column(name="dong")
     private String dong;
 

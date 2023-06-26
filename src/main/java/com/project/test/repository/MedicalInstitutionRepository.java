@@ -10,23 +10,23 @@ import java.util.List;
 
 @Repository
 public interface MedicalInstitutionRepository extends JpaRepository<MedicalInstitution,Long > {
-    List<MedicalInstitution> findByGu(String gu);
-    @Query(value="SELECT * FROM medical_institution WHERE gu='서원구' limit 100",nativeQuery = true)
-    List<MedicalInstitution> findByGuLimit();
-    @Query(value="SELECT * FROM medical_institution m WHERE" +
-            " m.hospital_name LIKE %?% " +
-            "AND m.ddo LIKE %?% " +
-            "AND m.si LIKE %?% " +
-            "AND m.dong LIKE %?% " +
-            "AND m.medical_institution LIKE %?% " +
-            "AND m.medical_department LIKE %?%"
-            ,nativeQuery = true)
-    List<MedicalInstitution> search(String hp,
-                                    String ddo,
-                                    String si,
-                                    String dong,
-                                    String mi,
-                                    String md);
+//    List<MedicalInstitution> findByGu(String gu);
+//    @Query(value="SELECT * FROM medical_institution WHERE gu='서원구' limit 100",nativeQuery = true)
+//    List<MedicalInstitution> findByGuLimit();
+//    @Query(value="SELECT * FROM medical_institution m WHERE" +
+//            " m.hospital_name LIKE %?% " +
+//            "AND m.ddo LIKE %?% " +
+//            "AND m.si LIKE %?% " +
+//            "AND m.dong LIKE %?% " +
+//            "AND m.medical_institution LIKE %?% " +
+//            "AND m.medical_department LIKE %?%"
+//            ,nativeQuery = true)
+//    List<MedicalInstitution> search(String hp,
+//                                    String ddo,
+//                                    String si,
+//                                    String dong,
+//                                    String mi,
+//                                    String md);
 //    @Query("SELECT l FROM MedicalInstitution l WHERE " +
 //            "(6371 * acos(cos(radians(:latitude)) * " +
 //            "cos(radians(l.lat)) * " +
@@ -52,14 +52,24 @@ List<MedicalInstitution> findNearbyLocationsOrderedByDistance(
 //    List<MedicalInstitution> findByMdFuzzyMatch(@Param("name") String name);
 
 //    @Query(value = "SELECT * FROM medical_institution WHERE medical_department IN (:departments)", nativeQuery = true)
-@Query("SELECT m FROM MedicalInstitution m WHERE m.ddo = :district AND " +
+    @Query("SELECT m FROM MedicalInstitution m WHERE m.ddo=:ddo AND m.si = :district AND " +
         "(m.medicalDepartment = :department OR " +
         "m.medicalDepartment LIKE :department||'%' " +
         "OR m.medicalDepartment LIKE '%, '||:department||'%' " +
         "OR m.medicalDepartment LIKE '%,'||:department||'%')")
 //    List<MedicalInstitution> findByMdFuzzyMatch(@Param("department") String department);
-    List<MedicalInstitution> findByDistrictAndMedicalDepartment(@Param("district") String district, @Param("department") String department);
+    List<MedicalInstitution> findByDistrictAndMedicalDepartment(@Param("ddo") String ddo, @Param("district") String district, @Param("department") String department);
 
+    @Query("SELECT DISTINCT m.si FROM MedicalInstitution m WHERE m.ddo = ?1 order by m.si asc ")
+    List<String> findDistinctSiByAnotherField(String value);
+
+    @Query("SELECT m FROM MedicalInstitution m WHERE m.ddo=:ddo  AND " +
+            "(m.medicalDepartment = :department OR " +
+            "m.medicalDepartment LIKE :department||'%' " +
+            "OR m.medicalDepartment LIKE '%, '||:department||'%' " +
+            "OR m.medicalDepartment LIKE '%,'||:department||'%')")
+//    List<MedicalInstitution> findByMdFuzzyMatch(@Param("department") String department);
+    List<MedicalInstitution> findByDistrictAndMedicalDepartmentAll(@Param("ddo") String ddo, @Param("department") String department);
 
 //    @Query(value = "SELECT * FROM medical_institution WHERE medical_department REGEXP '^:name$'",nativeQuery = true)
 //    List<MedicalInstitution> findByMdFuzzyMatch(@Param("name") String name);

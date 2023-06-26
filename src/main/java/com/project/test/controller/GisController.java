@@ -16,10 +16,10 @@ public class GisController {
     public ResponseDto<?> medicalInstitution(){
         return gisService.mIInfo();
     }
-    @GetMapping("miInfo/ch")
-    public ResponseDto<?> medicalInstitutionCh(){
-        return gisService.mIInfoCh();
-    }
+//    @GetMapping("miInfo/ch")
+//    public ResponseDto<?> medicalInstitutionCh(){
+//        return gisService.mIInfoCh();
+//    }
 
     @GetMapping("miInfo/search")
     public ResponseDto<?> medicalInstitutionSearch(){

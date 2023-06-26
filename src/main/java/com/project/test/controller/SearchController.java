@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.*;
 public class SearchController {
     private final SearchService searchService;
 
-    @GetMapping("/search")
-    public ResponseDto<?> Search(SearchDto requestDto){
-        return searchService.search(requestDto);
-    }
+//    @GetMapping("/search")
+//    public ResponseDto<?> Search(SearchDto requestDto){
+//        return searchService.search(requestDto);
+//    }
 
     @PostMapping("/nameSearch")
     public ResponseDto<?> nameSearch(
@@ -21,6 +21,13 @@ public class SearchController {
              SearchDto data){
         System.out.println(data.getHn());
         return searchService.searchName(data);
+    }
+    @PostMapping("/dosiSelect")
+    public ResponseDto<?> siSearch(
+            @RequestBody
+            SearchDto data){
+        System.out.println("데이타"+data.getDdo());
+        return searchService.anotherField(data);
     }
     @PostMapping("/mdSearch")
     public ResponseDto<?> mdSearch(
