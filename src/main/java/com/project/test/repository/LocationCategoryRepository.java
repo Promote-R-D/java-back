@@ -18,7 +18,6 @@ public interface LocationCategoryRepository extends JpaRepository<LocationCatego
     List<String> findDistinctSystemNamesByDetailField(@Param("detailField") String detailField);
     
     //보건 복지 카테고리 데이터 불러오기
-    Page<LocationCategory> findBySystemName(String systemName, Pageable pageable);
+    Page<LocationCategory> findByDdoAndSystemName(String ddo, String systemName, Pageable pageable);
 
-    //위치 기반으로 가져오기
 }

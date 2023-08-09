@@ -17,6 +17,4 @@ public class SearchDto {
     private String hn;
     private String md;
     private String title;
-
-
 }

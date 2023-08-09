@@ -27,7 +27,17 @@ public class LocationCategory {
 
     @Column(name="related_information")
     private String relatedInformation;
+    @Column(name="ddo")
+    private String ddo;
 
+    @Column(name="si")
+    private String si;
+
+    @Column(name="dong")
+    private String dong;
+
+    @Column(name="road")
+    private String road;
     @Column(name="address")
     private String address;
 

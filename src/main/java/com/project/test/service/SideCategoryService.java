@@ -24,11 +24,11 @@ public class SideCategoryService {
         return ResponseDto.success(distinctSystemNamesByDetailField);
     }
 
-    public Page<LocationCategory> getHospitalsBySystemName(String systemName, int page, int size) {
+    public Page<LocationCategory> getHospitalsBySystemName(String ddo,String systemName, int page, int size) {
 
         Pageable pageable = PageRequest.of(page, size);
-        Page<LocationCategory> hospitalsBySystemName = locationCategoryRepository.findBySystemName(systemName, pageable);
+        Page<LocationCategory> hospitalsBySystemName = locationCategoryRepository.findByDdoAndSystemName(ddo,systemName, pageable);
         System.out.println(hospitalsBySystemName.getContent());
-        return locationCategoryRepository.findBySystemName(systemName, pageable);
+        return locationCategoryRepository.findByDdoAndSystemName(ddo,systemName, pageable);
     }
 }

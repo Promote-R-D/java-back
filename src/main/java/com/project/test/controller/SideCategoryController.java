@@ -22,11 +22,12 @@ public class SideCategoryController {
     }
     @GetMapping("/NameList")
     public ResponseDto<Page<LocationCategory>> getHospitalsBySystemName(
+            @RequestParam("province") String ddo,
             @RequestParam("systemName") String systemName,
             @RequestParam(value = "page", defaultValue = "0") int page,
             @RequestParam(value = "size", defaultValue = "10") int size
     ) {
-        Page<LocationCategory> hospitals = sideCategoryService.getHospitalsBySystemName(systemName, page, size);
+        Page<LocationCategory> hospitals = sideCategoryService.getHospitalsBySystemName(ddo,systemName, page, size);
         return ResponseDto.success(hospitals);
     }
 }
